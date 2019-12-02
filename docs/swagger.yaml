@@ -1,0 +1,23 @@
+definitions:
+  handler.Test:
+    properties:
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /Hello:
+    get:
+      description: 实际并没有什么用只是用来看看的
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Test'
+        "400": {}
+      summary: 第一个API
+      tags:
+      - 文章
+swagger: "2.0"
