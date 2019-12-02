@@ -1,9 +1,9 @@
 # GoSpree
 开发中
-##相关库
+## 相关库
 * gorm https://gorm.io/
 * gin https://gin-gonic.com/
-##目录结构
+## 目录结构
 >GoSpree
 >>core *//核心库*
 >>
