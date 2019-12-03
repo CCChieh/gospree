@@ -5,7 +5,7 @@
         "license": {}
     },
     "paths": {
-        "/Hello": {
+        "/HelloHandler": {
             "get": {
                 "description": "实际并没有什么用只是用来看看的",
                 "tags": [
@@ -22,9 +22,99 @@
                     "400": {}
                 }
             }
+        },
+        "/user": {
+            "post": {
+                "tags": [
+                    "用户"
+                ],
+                "summary": "新建用户",
+                "parameters": [
+                    {
+                        "description": "用户",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/handler.CreateUserParam"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功后返回值",
+                        "schema": {
+                            "$ref": "#/definitions/dao.User"
+                        }
+                    },
+                    "400": {
+                        "description": "fail\" \"失败后返回值",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/info": {
+            "get": {
+                "tags": [
+                    "用户"
+                ],
+                "summary": "通过邮箱获取用户信息",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "用户的邮箱",
+                        "name": "email",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "成功后返回值",
+                        "schema": {
+                            "$ref": "#/definitions/dao.User"
+                        }
+                    },
+                    "400": {
+                        "description": "fail\" \"失败后返回值",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "dao.User": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "handler.CreateUserParam": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "handler.Test": {
             "type": "object",
             "properties": {

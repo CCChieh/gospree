@@ -14,9 +14,9 @@ type Test struct {
 // @Tags 文章
 // @Success 200 object Test 成功后返回值
 // @Failure 400
-// @Router /Hello [get]
+// @Router /HelloHandler [get]
 // @version 1.0
-func Hello(c *gin.Context) {
+func HelloHandler(c *gin.Context) {
 
 	c.JSON(http.StatusOK, Test{Name: "Zheng"})
 }

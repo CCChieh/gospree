@@ -26,9 +26,15 @@ func (rest *RestServer) Start(port int) {
 	//gin.SetMode(gin.ReleaseMode)
 
 	r := gin.New()
-	r.Use(middleware.Logger(), gin.Recovery())
+	r.Use(middleware.LoggerMiddleware(), gin.Recovery())
 
-	r.GET("/Hello", handler.Hello)
+	r.GET("/HelloHandler", handler.HelloHandler)
+
+	userG := r.Group("/user")
+	{
+		userG.POST("", handler.CreateUserHandler)
+		userG.GET("/info", handler.GetUserInfoHandler)
+	}
 
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "RELEASE"))
 

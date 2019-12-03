@@ -1,7 +1,7 @@
 package util
 
 import (
-	"encoding/json"
+	"github.com/json-iterator/go"
 	"time"
 )
 
@@ -11,6 +11,7 @@ func GetJsonTime(js []byte) time.Time {
 	v := &struct {
 		Time time.Time
 	}{}
+	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	err := json.Unmarshal(js, v)
 	if err != nil {
 		panic(err.Error())

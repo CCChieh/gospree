@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func Logger() gin.HandlerFunc {
+func LoggerMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
 

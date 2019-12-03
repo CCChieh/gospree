@@ -1,5 +1,6 @@
 package core
 
 var (
-	Log logger
+	Log  logger
+	Conf config
 )
