@@ -26,3 +26,13 @@
 >main.go *//程序入口*
 >
 >config.json *//配置文件*
+
+##安装注意
+    
+*使用swagger自动更新API文档
+
+    go get -u github.com/swaggo/swag/cmd/swag
+    
+更新API文档
+
+    swag init

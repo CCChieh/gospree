@@ -7,10 +7,10 @@ import (
 )
 
 type router struct {
-	group       string
-	path        string
-	method      string
-	handlerFunc []gin.HandlerFunc
+	group    string
+	path     string
+	method   string
+	handlers []gin.HandlerFunc
 }
 
 type helper struct {
@@ -25,13 +25,16 @@ type helper struct {
 // @version 1.0
 func (h *helper) HelperHandler() (r *router) {
 	return &router{
-		"",
-		"",
-		"GET",
-		[]gin.HandlerFunc{
-			func(c *gin.Context) {
-				c.String(http.StatusOK, "Cool~")
-			}}}
+		group:  "",
+		path:   "/helper",
+		method: "GET",
+		handlers: []gin.HandlerFunc{
+			helperHandler,
+		}}
+}
+
+func helperHandler(c *gin.Context) {
+	c.String(http.StatusOK, "Cool~")
 }
 
 func Build(r *gin.Engine) {
