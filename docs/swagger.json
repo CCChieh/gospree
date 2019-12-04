@@ -23,6 +23,24 @@
                 }
             }
         },
+        "/helper": {
+            "get": {
+                "description": "实际并没有什么用只是用来看看的",
+                "tags": [
+                    "文章"
+                ],
+                "summary": "helper",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.Test"
+                        }
+                    },
+                    "400": {}
+                }
+            }
+        },
         "/user": {
             "post": {
                 "tags": [
@@ -37,7 +55,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/handler.CreateUserParam"
+                            "$ref": "#/definitions/handler.CreateUserParams"
                         }
                     }
                 ],
@@ -101,7 +119,7 @@
                 }
             }
         },
-        "handler.CreateUserParam": {
+        "handler.CreateUserParams": {
             "type": "object",
             "properties": {
                 "email": {

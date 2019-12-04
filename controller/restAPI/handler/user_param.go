@@ -1,6 +1,6 @@
 package handler
 
-type CreateUserParam struct {
+type CreateUserParams struct {
 	Email    string
 	Name     string
 	Password string

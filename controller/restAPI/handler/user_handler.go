@@ -26,14 +26,14 @@ func GetUserInfoHandler(c *gin.Context) {
 
 // @Tags 用户
 // @Summary 新建用户
-// @Param user body handler.CreateUserParam true "用户"
+// @Param user body handler.CreateUserParams true "用户"
 // @Success 200 object dao.User "成功后返回值"
 // @Failure 400 {string} string "fail" "失败后返回值"
 // @Router /user [post]
 // @version 1.0
 func CreateUserHandler(c *gin.Context) {
 	user := new(dao.User)
-	createUserParam := new(CreateUserParam)
+	createUserParam := new(CreateUserParams)
 	if err := c.ShouldBindJSON(&createUserParam); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

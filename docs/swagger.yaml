@@ -6,7 +6,7 @@ definitions:
       name:
         type: string
     type: object
-  handler.CreateUserParam:
+  handler.CreateUserParams:
     properties:
       email:
         type: string
@@ -36,6 +36,18 @@ paths:
       summary: 第一个API
       tags:
       - 文章
+  /helper:
+    get:
+      description: 实际并没有什么用只是用来看看的
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.Test'
+        "400": {}
+      summary: helper
+      tags:
+      - 文章
   /user:
     post:
       parameters:
@@ -44,7 +56,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/handler.CreateUserParam'
+          $ref: '#/definitions/handler.CreateUserParams'
           type: object
       responses:
         "200":

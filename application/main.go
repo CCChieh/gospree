@@ -1,9 +1,9 @@
 package service
 
 import (
+	"github.com/ccchieh/gospree/application/elog"
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/dao"
-	"github.com/ccchieh/gospree/service/elog"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 

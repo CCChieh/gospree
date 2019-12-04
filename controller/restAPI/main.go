@@ -2,10 +2,10 @@ package restAPI
 
 import (
 	"fmt"
+	"github.com/ccchieh/gospree/controller/restAPI/handler"
+	"github.com/ccchieh/gospree/controller/restAPI/middleware"
 	"github.com/ccchieh/gospree/core"
 	_ "github.com/ccchieh/gospree/docs"
-	"github.com/ccchieh/gospree/restAPI/handler"
-	"github.com/ccchieh/gospree/restAPI/middleware"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"

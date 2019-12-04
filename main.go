@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/ccchieh/gospree/service"
+	"github.com/ccchieh/gospree/application"
 )
 
 func main() {
