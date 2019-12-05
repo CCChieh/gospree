@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/ccchieh/gospree/util/handlerHelper"
+	"github.com/ccchieh/ginHelper"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -13,8 +13,8 @@ import (
 // @Failure 400
 // @Router /HelloHandler [get]
 // @version 1.0
-func (h *helper) HelloHandler() (r *handlerHelper.Router) {
-	return &handlerHelper.Router{
+func (h *helper) HelloHandler() (r *ginHelper.Router) {
+	return &ginHelper.Router{
 		Path:   "/HelloHandler",
 		Method: "GET",
 		Handlers: []gin.HandlerFunc{

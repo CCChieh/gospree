@@ -1,9 +1,9 @@
 package user
 
 import (
+	"github.com/ccchieh/ginHelper"
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/dao"
-	"github.com/ccchieh/gospree/util/handlerHelper"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -15,8 +15,8 @@ import (
 // @Failure 400 {string} string "fail" "失败后返回值"
 // @Router /user [get]
 // @version 1.0
-func (h *helper) GetUserInfoHandler() (r *handlerHelper.Router) {
-	return &handlerHelper.Router{
+func (h *helper) GetUserInfoHandler() (r *ginHelper.Router) {
+	return &ginHelper.Router{
 		Path:   "/",
 		Method: "GET",
 		Handlers: []gin.HandlerFunc{
@@ -40,8 +40,8 @@ func getUserInfoHandler(c *gin.Context) {
 // @Failure 400 {string} string "fail" "失败后返回值"
 // @Router /user [post]
 // @version 1.0
-func (h *helper) CreateUserHandler() (r *handlerHelper.Router) {
-	return &handlerHelper.Router{
+func (h *helper) CreateUserHandler() (r *ginHelper.Router) {
+	return &ginHelper.Router{
 		Path:   "/",
 		Method: "POST",
 		Handlers: []gin.HandlerFunc{

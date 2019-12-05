@@ -1,8 +1,8 @@
 package user
 
 import (
+	"github.com/ccchieh/ginHelper"
 	"github.com/gin-gonic/gin"
-	"github.com/CCChieh/ginHelper"
 	"reflect"
 )
 

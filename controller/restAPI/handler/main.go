@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/CCChieh/ginHelper"
+	"github.com/ccchieh/ginHelper"
 	"github.com/gin-gonic/gin"
 	"reflect"
 )
