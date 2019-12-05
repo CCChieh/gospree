@@ -1,22 +1,27 @@
 package handler
 
 import (
+	"github.com/ccchieh/gospree/util/handlerHelper"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-type Test struct {
-	Name string
-}
-
 // @Summary 第一个API
-// @Description 实际并没有什么用只是用来看看的
+// @Description 这是第一个API
 // @Tags 文章
-// @Success 200 object Test 成功后返回值
+// @Success 200
 // @Failure 400
 // @Router /HelloHandler [get]
 // @version 1.0
-func HelloHandler(c *gin.Context) {
+func (h *helper) HelloHandler() (r *handlerHelper.Router) {
+	return &handlerHelper.Router{
+		Path:   "/HelloHandler",
+		Method: "GET",
+		Handlers: []gin.HandlerFunc{
+			helloHandler,
+		}}
+}
+func helloHandler(c *gin.Context) {
 
-	c.JSON(http.StatusOK, Test{Name: "Zheng"})
+	c.String(http.StatusOK, "Hello world!")
 }

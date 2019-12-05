@@ -1,4 +1,4 @@
-package handler
+package user
 
 type CreateUserParams struct {
 	Email    string

@@ -3,6 +3,7 @@ package restAPI
 import (
 	"fmt"
 	"github.com/ccchieh/gospree/controller/restAPI/handler"
+	"github.com/ccchieh/gospree/controller/restAPI/handler/user"
 	"github.com/ccchieh/gospree/controller/restAPI/middleware"
 	"github.com/ccchieh/gospree/core"
 	_ "github.com/ccchieh/gospree/docs"
@@ -27,14 +28,10 @@ func (rest *RestServer) Start(port int) {
 
 	r := gin.New()
 	r.Use(middleware.LoggerMiddleware(), gin.Recovery())
-
-	r.GET("/HelloHandler", handler.HelloHandler)
-
-	userG := r.Group("/user")
-	{
-		userG.POST("", handler.CreateUserHandler)
-		userG.GET("/info", handler.GetUserInfoHandler)
-	}
+	//handler中自动建立路由
+	handler.Build(r)
+	//user的Group中自动建立路由
+	user.Build(r.Group("/user"))
 
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "RELEASE"))
 
