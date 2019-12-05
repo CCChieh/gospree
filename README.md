@@ -27,7 +27,7 @@
 >
 >config.json *//配置文件*
 
-##安装注意
+## 安装注意
     
 *使用swagger自动更新API文档
 
@@ -36,3 +36,41 @@
 更新API文档
 
     swag init
+    
+## handlerHelper
+
+handlerHelper是一个自动把handlerFunc添加到Gin并且设置路由的工具包
+
+* 在handler文件夹中添加
+
+main.go
+
+    type helper struct {
+    }
+    
+    func Build(r gin.IRoutes) {
+        h := new(helper)
+        valueOfh := reflect.ValueOf(h)
+        numMethod := valueOfh.NumMethod()
+        for i := 0; i < numMethod; i++ {
+            rt := valueOfh.Method(i).Call(nil)[0].Interface().(*handlerHelper.Router)
+            rt.AddHandler(r)
+        }
+    }
+    
+之后每次写handlerFunc的时候都类似下方的helloHandler前面加上一个*helper的一个
+方法HelloHandler()中设置路由。
+
+
+    func (h *helper) HelloHandler() (r *handlerHelper.Router) {
+        return &handlerHelper.Router{
+            Path:   "/HelloHandler",
+            Method: "GET",
+            Handlers: []gin.HandlerFunc{
+                helloHandler,
+            }}
+    }
+    func helloHandler(c *gin.Context) {
+    
+        c.String(http.StatusOK, "Hello world!")
+    }
