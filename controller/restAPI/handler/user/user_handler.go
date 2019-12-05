@@ -15,7 +15,7 @@ import (
 // @Failure 400 {string} string "fail" "失败后返回值"
 // @Router /user [get]
 // @version 1.0
-func (h *helper) GetUserInfoHandler() (r *ginHelper.Router) {
+func (h *Helper) GetUserInfoHandler() (r *ginHelper.Router) {
 	return &ginHelper.Router{
 		Path:   "/",
 		Method: "GET",
@@ -40,7 +40,7 @@ func getUserInfoHandler(c *gin.Context) {
 // @Failure 400 {string} string "fail" "失败后返回值"
 // @Router /user [post]
 // @version 1.0
-func (h *helper) CreateUserHandler() (r *ginHelper.Router) {
+func (h *Helper) CreateUserHandler() (r *ginHelper.Router) {
 	return &ginHelper.Router{
 		Path:   "/",
 		Method: "POST",

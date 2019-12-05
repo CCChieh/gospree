@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	service.App.Start()
+	application.App.Start()
 }

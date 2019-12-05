@@ -13,7 +13,7 @@ import (
 // @Failure 400
 // @Router /HelloHandler [get]
 // @version 1.0
-func (h *helper) HelloHandler() (r *ginHelper.Router) {
+func (h *Helper) HelloHandler() (r *ginHelper.Router) {
 	return &ginHelper.Router{
 		Path:   "/HelloHandler",
 		Method: "GET",

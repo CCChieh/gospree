@@ -2,6 +2,7 @@ package restAPI
 
 import (
 	"fmt"
+	"github.com/ccchieh/ginHelper"
 	"github.com/ccchieh/gospree/controller/restAPI/handler"
 	"github.com/ccchieh/gospree/controller/restAPI/handler/user"
 	"github.com/ccchieh/gospree/controller/restAPI/middleware"
@@ -29,9 +30,9 @@ func (rest *RestServer) Start(port int) {
 	r := gin.New()
 	r.Use(middleware.LoggerMiddleware(), gin.Recovery())
 	//handler中自动建立路由
-	handler.Build(r)
+	ginHelper.Build(new(handler.Helper), r)
 	//user的Group中自动建立路由
-	user.Build(r.Group("/user"))
+	ginHelper.Build(new(user.Helper), r.Group("/user"))
 
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "RELEASE"))
 
