@@ -1,8 +1,8 @@
 package user
 
 import (
-	"github.com/ccchieh/gospree/util/handlerHelper"
 	"github.com/gin-gonic/gin"
+	"github.com/CCChieh/ginHelper"
 	"reflect"
 )
 
@@ -14,7 +14,7 @@ func Build(r gin.IRoutes) {
 	valueOfh := reflect.ValueOf(h)
 	numMethod := valueOfh.NumMethod()
 	for i := 0; i < numMethod; i++ {
-		rt := valueOfh.Method(i).Call(nil)[0].Interface().(*handlerHelper.Router)
+		rt := valueOfh.Method(i).Call(nil)[0].Interface().(*ginHelper.Router)
 		rt.AddHandler(r)
 	}
 }
