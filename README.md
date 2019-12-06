@@ -30,12 +30,11 @@
 ## 安装注意
     
 * 使用swagger自动更新API文档
-
-    go get -u github.com/swaggo/swag/cmd/swag
-    
+```
+go get -u github.com/swaggo/swag/cmd/swag
+``` 
 * 更新API文档
 
 ```
 swag init
 ```
-    

@@ -27,7 +27,7 @@
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "用户的邮箱",
+                        "description": "邮箱",
                         "name": "email",
                         "in": "query",
                         "required": true
@@ -61,7 +61,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/user.CreateUserParams"
+                            "$ref": "#/definitions/user.createUserParams"
                         }
                     }
                 ],
@@ -94,8 +94,13 @@
                 }
             }
         },
-        "user.CreateUserParams": {
+        "user.createUserParams": {
             "type": "object",
+            "required": [
+                "email",
+                "name",
+                "password"
+            ],
             "properties": {
                 "email": {
                     "type": "string"

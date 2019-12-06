@@ -6,7 +6,7 @@ definitions:
       name:
         type: string
     type: object
-  user.CreateUserParams:
+  user.createUserParams:
     properties:
       email:
         type: string
@@ -14,6 +14,10 @@ definitions:
         type: string
       password:
         type: string
+    required:
+    - email
+    - name
+    - password
     type: object
 info:
   contact: {}
@@ -31,7 +35,7 @@ paths:
   /user:
     get:
       parameters:
-      - description: 用户的邮箱
+      - description: 邮箱
         in: query
         name: email
         required: true
@@ -55,7 +59,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/user.CreateUserParams'
+          $ref: '#/definitions/user.createUserParams'
           type: object
       responses:
         "200":
