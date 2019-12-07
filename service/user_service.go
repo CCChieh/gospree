@@ -2,6 +2,8 @@ package service
 
 import "github.com/ccchieh/gospree/model"
 
-func getUserInfoByEmailService(email string) *model.User {
-
+func GetUserInfoByEmailService(email string) (*model.User, error) {
+	user := new(model.User)
+	err := user.GetUserByEmail(email)
+	return user, err
 }

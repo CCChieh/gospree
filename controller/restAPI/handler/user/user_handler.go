@@ -4,6 +4,7 @@ import (
 	"github.com/ccchieh/ginHelper"
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
+	"github.com/ccchieh/gospree/service"
 	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -16,7 +17,7 @@ import (
 // @Failure 400
 // @Router /user [get]
 // @version 1.0
-func (h *Helper) GetUserInfoHandler() (r *ginHelper.Router) {
+func (h *Helper) GetUserInfoByEmailHandler() (r *ginHelper.Router) {
 	return &ginHelper.Router{
 		Path:   "/",
 		Method: "GET",
@@ -30,7 +31,12 @@ func getUserInfoByEmailHandler(c *gin.Context) {
 		ret.Result(c, http.StatusBadRequest, nil, err)
 		return
 	}
-	c.JSON(http.StatusOK, params)
+	user, err := service.GetUserInfoByEmailService(params.Email)
+	if err != nil {
+		ret.Result(c, http.StatusBadRequest, nil, ret.ErrUserNotFound)
+		return
+	}
+	ret.Result(c, http.StatusOK, gin.H{"email": user.Email, "name": user.Name}, nil)
 }
 
 // @Tags 用户

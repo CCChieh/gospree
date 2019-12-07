@@ -33,7 +33,7 @@ func (rest *RestServer) Start(port int) {
 	ginHelper.Build(new(handler.Helper), r)
 	//user的Group中自动建立路由
 	ginHelper.Build(new(user.Helper), r.Group("/user"))
-	core.Log.Info(r.BasePath())
+
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "RELEASE"))
 
 	s := &http.Server{
