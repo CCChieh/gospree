@@ -12,8 +12,8 @@ var (
 	ErrToken      = &retErr{Code: 20003, Message: "Error occurred while signing the JSON web token."}
 
 	// user errors
-	ErrEncrypt           = &retErr{Code: 20101, Message: "Error occurred while encrypting the user password."}
-	ErrUserNotFound      = &retErr{Code: 20102, Message: "The user was not found."}
+	ErrUserNotFound      = &retErr{Code: 20101, Message: "The user was not found."}
+	ErrUserCreated       = &retErr{Code: 20102, Message: "The user was created."}
 	ErrTokenInvalid      = &retErr{Code: 20103, Message: "The token was invalid."}
 	ErrPasswordIncorrect = &retErr{Code: 20104, Message: "The password was incorrect."}
 )

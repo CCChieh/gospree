@@ -51,7 +51,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/user.createUserParams"
+                            "$ref": "#/definitions/service.CreateUserParams"
                         }
                     }
                 ],
@@ -63,7 +63,7 @@
         }
     },
     "definitions": {
-        "user.createUserParams": {
+        "service.CreateUserParams": {
             "type": "object",
             "required": [
                 "email",

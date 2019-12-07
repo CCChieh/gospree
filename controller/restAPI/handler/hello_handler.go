@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/ccchieh/ginHelper"
+	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -23,5 +24,5 @@ func (h *Helper) HelloHandler() (r *ginHelper.Router) {
 }
 func helloHandler(c *gin.Context) {
 
-	c.String(http.StatusOK, "Hello world!")
+	ret.Result(c, http.StatusOK, "Hello", nil)
 }

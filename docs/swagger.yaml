@@ -1,5 +1,5 @@
 definitions:
-  user.createUserParams:
+  service.CreateUserParams:
     properties:
       email:
         type: string
@@ -46,7 +46,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/user.createUserParams'
+          $ref: '#/definitions/service.CreateUserParams'
           type: object
       responses:
         "200": {}

@@ -2,8 +2,6 @@ package user
 
 import (
 	"github.com/ccchieh/ginHelper"
-	"github.com/ccchieh/gospree/core"
-	"github.com/ccchieh/gospree/model"
 	"github.com/ccchieh/gospree/service"
 	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
@@ -26,12 +24,12 @@ func (h *Helper) GetUserInfoByEmailHandler() (r *ginHelper.Router) {
 		}}
 }
 func getUserInfoByEmailHandler(c *gin.Context) {
-	params := new(getUserInfoByEmailParams)
+	params := new(service.GetUserInfoByEmailParams)
 	if err := c.Bind(params); err != nil {
 		ret.Result(c, http.StatusBadRequest, nil, err)
 		return
 	}
-	user, err := service.GetUserInfoByEmailService(params.Email)
+	user, err := service.GetUserInfoByEmailService(params)
 	if err != nil {
 		ret.Result(c, http.StatusBadRequest, nil, ret.ErrUserNotFound)
 		return
@@ -41,7 +39,7 @@ func getUserInfoByEmailHandler(c *gin.Context) {
 
 // @Tags 用户
 // @Summary 新建用户
-// @Param user body user.createUserParams true "用户"
+// @Param user body service.CreateUserParams true "用户"
 // @Success 200
 // @Failure 400
 // @Router /user [post]
@@ -54,17 +52,18 @@ func (h *Helper) CreateUserHandler() (r *ginHelper.Router) {
 			createUserHandler,
 		}}
 }
+
 func createUserHandler(c *gin.Context) {
-	user := new(model.User)
-	params := new(createUserParams)
+	params := new(service.CreateUserParams)
 	if err := c.Bind(&params); err != nil {
 		ret.Result(c, http.StatusBadRequest, nil, err)
 		return
 	}
-	user.Email = params.Email
-	user.Name = params.Name
-	user.Password = params.Password
-	core.Log.Info(user.Email, user.Name, user.Password)
-	core.Log.Info(gin.H{"status": "you are logged in"})
-	ret.Result(c, http.StatusOK, gin.H{"email": params.Email, "name": params.Name}, nil)
+
+	user, err := service.CreateUserService(params)
+	if err != nil {
+		ret.Result(c, http.StatusBadRequest, nil, err)
+		return
+	}
+	ret.Result(c, http.StatusOK, gin.H{"email": user.Email, "name": user.Name}, nil)
 }

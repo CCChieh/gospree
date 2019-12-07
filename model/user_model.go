@@ -11,6 +11,17 @@ type User struct {
 	Password   string `gorm:"type:varchar(64);not null"`
 }
 
-func (user *User) GetUserByEmail(email string) error {
-	return dao.Where(User{Email: email}).First(user).Error
+func (user *User) GetUserByEmail() error {
+	return dao.First(user).Error
+}
+
+func (user *User) CreateUser() error {
+	return dao.Create(user).Error
+}
+
+func (user *User) UserExist() bool {
+	if err := dao.First(user).Error; err != nil {
+		return false
+	}
+	return true
 }
