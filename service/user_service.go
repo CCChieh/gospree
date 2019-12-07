@@ -1,7 +1,7 @@
 package service
 
-import "github.com/ccchieh/gospree/dao"
+import "github.com/ccchieh/gospree/model"
 
-func getUserInfoByEmailService(email string) *dao.User {
+func getUserInfoByEmailService(email string) *model.User {
 
 }

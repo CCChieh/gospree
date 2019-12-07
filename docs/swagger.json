@@ -34,18 +34,8 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "成功后返回值",
-                        "schema": {
-                            "$ref": "#/definitions/dao.User"
-                        }
-                    },
-                    "400": {
-                        "description": "fail\" \"失败后返回值",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
+                    "200": {},
+                    "400": {}
                 }
             },
             "post": {
@@ -66,34 +56,13 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "成功后返回值",
-                        "schema": {
-                            "$ref": "#/definitions/dao.User"
-                        }
-                    },
-                    "400": {
-                        "description": "fail\" \"失败后返回值",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
+                    "200": {},
+                    "400": {}
                 }
             }
         }
     },
     "definitions": {
-        "dao.User": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
         "user.createUserParams": {
             "type": "object",
             "required": [

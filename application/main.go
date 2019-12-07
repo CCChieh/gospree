@@ -3,7 +3,7 @@ package application
 import (
 	"github.com/ccchieh/elog"
 	"github.com/ccchieh/gospree/core"
-	"github.com/ccchieh/gospree/dao"
+	"github.com/ccchieh/gospree/model"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
@@ -21,7 +21,7 @@ func init() {
 		"gospree",
 		"wdsrshi19971025",
 	)
-	if err := dao.Connection(core.Conf.GetDatabaseUrl()); err != nil {
+	if err := model.Connection(core.Conf.GetDatabaseUrl()); err != nil {
 		core.Log.Err(err)
 	}
 

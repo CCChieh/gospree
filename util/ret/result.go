@@ -9,13 +9,18 @@ import (
 func Result(c *gin.Context, statusCode int, data interface{}, err error) {
 
 	if err != nil {
-		result := errorResult{baseResult{Time: time.Now()}, statusCode, err}
+		e, ok := err.(*retErr)
+		if !ok {
+			e.Code = 99999
+			e.Message = "Unknown error: " + err.Error()
+		}
+		result := errorResult{baseResult{time.Now(), e.Code}, e.Message}
 		c.JSON(statusCode, result)
 		core.Log.Err(err)
 		return
 	}
 	if data != nil {
-		result := okResult{baseResult{Time: time.Now()}, data}
+		result := okResult{baseResult{time.Now(), 0}, data}
 		c.JSON(statusCode, result)
 	}
 

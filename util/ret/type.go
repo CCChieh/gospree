@@ -4,6 +4,7 @@ import "time"
 
 type baseResult struct {
 	Time time.Time `json:"time"`
+	Code int       `json:"code"`
 }
 
 type okResult struct {
@@ -13,6 +14,5 @@ type okResult struct {
 
 type errorResult struct {
 	baseResult
-	Code   int         `json:"code"`
-	Errors interface{} `json:"errors"`
+	Message interface{} `json:"message"`
 }
