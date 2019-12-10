@@ -23,12 +23,12 @@
                 "tags": [
                     "用户"
                 ],
-                "summary": "通过邮箱获取用户信息",
+                "summary": "通过ID获取用户信息",
                 "parameters": [
                     {
-                        "type": "string",
-                        "description": "邮箱",
-                        "name": "email",
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
                         "in": "query",
                         "required": true
                     }
@@ -60,9 +60,48 @@
                     "400": {}
                 }
             }
+        },
+        "/user/token": {
+            "post": {
+                "tags": [
+                    "用户"
+                ],
+                "summary": "用户获取token",
+                "parameters": [
+                    {
+                        "description": "用户",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.CreateTokenParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {}
+                }
+            }
         }
     },
     "definitions": {
+        "service.CreateTokenParams": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "service.CreateUserParams": {
             "type": "object",
             "required": [
