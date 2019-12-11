@@ -2,6 +2,9 @@ package user
 
 import (
 	"github.com/ccchieh/ginHelper"
+	"github.com/ccchieh/gospree/controller/restAPI/middleware"
+	"github.com/ccchieh/gospree/core"
+	"github.com/ccchieh/gospree/model"
 	"github.com/ccchieh/gospree/service"
 	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
@@ -20,6 +23,7 @@ func (h *Helper) GetUserInfoByIDHandler() (r *ginHelper.Router) {
 		Path:   "/",
 		Method: "GET",
 		Handlers: []gin.HandlerFunc{
+			middleware.TokenMiddleware(),
 			getUserInfoByIDHandler,
 		}}
 }
@@ -29,9 +33,15 @@ func getUserInfoByIDHandler(c *gin.Context) {
 		ret.Result(c, http.StatusBadRequest, nil, err)
 		return
 	}
-	user, err := service.GetUserInfoByIDService(params)
-	if err != nil {
+	value, exists := c.Get("user")
+	if !exists {
 		ret.Result(c, http.StatusBadRequest, nil, ret.ErrUserNotFound)
+		return
+	}
+	user, ok := value.(*model.User)
+	core.Log.Info(user.ID, params.ID)
+	if !ok || user.ID != params.ID {
+		ret.Result(c, http.StatusUnauthorized, nil, ret.ErrValidation)
 		return
 	}
 	ret.Result(c, http.StatusOK, gin.H{"email": user.Email, "name": user.Name}, nil)

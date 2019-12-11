@@ -97,6 +97,5 @@ func (user *User) CheckToken(token string) bool {
 	if err != nil {
 		return false
 	}
-
 	return pl.ExpirationTime.After(now)
 }
