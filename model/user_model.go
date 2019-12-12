@@ -18,18 +18,11 @@ type User struct {
 }
 
 func (user *User) GetUser() error {
-	return dao.First(user).Error
+	return dao.Where(user).First(user).Error
 }
 
 func (user *User) CreateUser() error {
 	return dao.Create(user).Error
-}
-
-func (user *User) UserExist() bool {
-	if err := dao.First(user).Error; err != nil {
-		return false
-	}
-	return true
 }
 
 func (user *User) Verification(password string) bool {

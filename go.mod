@@ -17,6 +17,7 @@ require (
 	github.com/swaggo/swag v1.5.1
 	golang.org/x/crypto v0.0.0-20190927123631-a832865fa7ad
 	golang.org/x/sys v0.0.0-20191204072324-ce4227a45e2e // indirect
+	gopkg.in/go-playground/validator.v8 v8.18.2
 	gopkg.in/go-playground/validator.v9 v9.30.2 // indirect
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )

@@ -7,13 +7,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func GetUserInfoByIDService(params *GetUserInfoByIDParams) (*model.User, error) {
-	user := new(model.User)
-	user.ID = params.ID
-	err := user.GetUser()
-	return user, err
-}
-
 func CreateUserService(params *CreateUserParams) (user *model.User, err error) {
 	user = &model.User{
 		Email:    params.Email,
@@ -42,6 +35,7 @@ func CreateTokenService(params *CreateTokenParams) (token string, id uint, err e
 	id = user.ID
 	if !user.Verification(params.Password) {
 		err = ret.ErrPasswordIncorrect
+		return
 	}
 	token, err = user.CreateToken()
 	return
