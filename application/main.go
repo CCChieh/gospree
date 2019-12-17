@@ -16,7 +16,7 @@ func init() {
 	core.Conf = new(config)
 	core.Conf.SetDatabase(
 		"gospree",
-		"localhost",
+		"lab.nimingshe.com",
 		3306,
 		"gospree",
 		"wdsrshi19971025",

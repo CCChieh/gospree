@@ -13,5 +13,4 @@
 .idea/
 go.sum
 config.json
-!/log
-!/GoSpree.log
+*.log
