@@ -18,8 +18,7 @@ func Result(c *gin.Context, statusCode int, data interface{}, err error) {
 		result := errorResult{baseResult{time.Now(), e.Code}, e.Message}
 		c.JSON(statusCode, result)
 		core.Log.Err(e)
-	}
-	if data != nil {
+	} else {
 		result := okResult{baseResult{time.Now(), 0}, data}
 		c.JSON(statusCode, result)
 	}

@@ -12,7 +12,7 @@ func Connection(databaseUrl string) (err error) {
 	if dao.DB, err = gorm.Open("mysql", databaseUrl); err != nil {
 		return err
 	}
-	dao.LogMode(false)
-	dao.AutoMigrate(&User{})
+	dao.LogMode(true)
+	dao.AutoMigrate(&User{}, &Note{})
 	return
 }

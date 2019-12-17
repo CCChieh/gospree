@@ -1,4 +1,14 @@
 definitions:
+  service.CreateNoteParams:
+    properties:
+      authorID:
+        type: integer
+      content:
+        type: string
+    required:
+    - authorID
+    - content
+    type: object
   service.CreateTokenParams:
     properties:
       email:
@@ -35,6 +45,22 @@ paths:
       summary: 第一个API
       tags:
       - 文章
+  /note:
+    post:
+      parameters:
+      - description: Note
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/service.CreateNoteParams'
+          type: object
+      responses:
+        "200": {}
+        "400": {}
+      summary: 新建Note
+      tags:
+      - Note
   /user:
     get:
       parameters:

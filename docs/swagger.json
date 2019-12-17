@@ -18,6 +18,30 @@
                 }
             }
         },
+        "/note": {
+            "post": {
+                "tags": [
+                    "Note"
+                ],
+                "summary": "新建Note",
+                "parameters": [
+                    {
+                        "description": "Note",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/service.CreateNoteParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {}
+                }
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -87,6 +111,21 @@
         }
     },
     "definitions": {
+        "service.CreateNoteParams": {
+            "type": "object",
+            "required": [
+                "authorID",
+                "content"
+            ],
+            "properties": {
+                "authorID": {
+                    "type": "integer"
+                },
+                "content": {
+                    "type": "string"
+                }
+            }
+        },
         "service.CreateTokenParams": {
             "type": "object",
             "required": [
