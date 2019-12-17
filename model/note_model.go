@@ -4,7 +4,7 @@ import "github.com/jinzhu/gorm"
 
 type Note struct {
 	gorm.Model `json:"-"`
-	Content    string
+	Content    string `gorm:"type:text"`
 	AuthorID   uint
 }
 

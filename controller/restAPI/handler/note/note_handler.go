@@ -26,12 +26,12 @@ func (h *Helper) CreateNoteHandler() (r *ginHelper.Router) {
 			return
 		}
 
-		_, err := service.CreateNoteService(params)
+		note, err := service.CreateNoteService(params)
 		if err != nil {
 			ret.Result(c, http.StatusBadRequest, nil, err)
 			return
 		}
-		ret.Result(c, http.StatusOK, nil, nil)
+		ret.Result(c, http.StatusOK, gin.H{"noteID": note.ID}, nil)
 	}
 
 	return &ginHelper.Router{

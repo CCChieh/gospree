@@ -9,10 +9,10 @@ type baseResult struct {
 
 type okResult struct {
 	baseResult
-	Data interface{} `json:"data"`
+	Data interface{} `json:"data,omitempty"`
 }
 
 type errorResult struct {
 	baseResult
-	Message interface{} `json:"message"`
+	Message interface{} `json:"message,omitempty"`
 }
