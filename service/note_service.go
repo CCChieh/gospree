@@ -14,7 +14,7 @@ func GetNoteService(params *GetNoteParams) (note *model.Note, err error) {
 func CreateNoteService(params *CreateNoteParams) (note *model.Note, err error) {
 	note = &model.Note{
 		Content:  params.Content,
-		AuthorID: params.AuthorID,
+		AuthorID: params.ID,
 	}
 	err = note.CreateNote()
 	return

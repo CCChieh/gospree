@@ -9,18 +9,17 @@ import (
 )
 
 func TokenMiddleware() gin.HandlerFunc {
+	//下面代码暂时不用，是用来对当前身份的认证
+	//var authFunc []func(tokenID uint, userID uint) bool
+	//selfAuth := func(tokenID uint, userID uint) bool { return tokenID == userID }
+	//for _, value := range identities {
+	//	switch value {
+	//	case "self":
+	//		authFunc=append(authFunc, selfAuth)
+	//	}
+	//}
+
 	return func(c *gin.Context) {
-		//token := util.GetToken(r)
-		//if token == "" {
-		//	jsonapi.Result(w, http.StatusUnauthorized, nil, elog.NewErrUnauthorized(r.URL.Path))
-		//	return
-		//}
-		//user := new(User)
-		//if !user.CheckToken(token) {
-		//	jsonapi.Result(w, http.StatusUnauthorized, nil, elog.NewErrUnauthorized(r.URL.Path))
-		//	return
-		//}
-		//handler.ServeHTTP(w, r)
 		auth := c.GetHeader("authorization")
 
 		if auth == "" {

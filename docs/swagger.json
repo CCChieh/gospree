@@ -19,6 +19,25 @@
             }
         },
         "/note": {
+            "get": {
+                "tags": [
+                    "Note"
+                ],
+                "summary": "获取Note",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Note",
+                        "name": "noteID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {},
+                    "400": {}
+                }
+            },
             "post": {
                 "tags": [
                     "Note"
@@ -27,7 +46,7 @@
                 "parameters": [
                     {
                         "description": "Note",
-                        "name": "user",
+                        "name": "note",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -114,15 +133,14 @@
         "service.CreateNoteParams": {
             "type": "object",
             "required": [
-                "authorID",
                 "content"
             ],
             "properties": {
-                "authorID": {
-                    "type": "integer"
-                },
                 "content": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 }
             }
         },

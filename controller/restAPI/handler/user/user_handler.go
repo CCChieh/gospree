@@ -17,23 +17,14 @@ import (
 // @Failure 400
 // @Router /user [get]
 // @version 1.0
-func (h *Helper) GetUserInfoByIDHandler() (r *ginHelper.Router) {
+func (h *Helper) GetUserInfoHandler() (r *ginHelper.Router) {
 	handler := func(c *gin.Context) {
-		params := new(service.GetUserInfoByIDParams)
-		if err := c.ShouldBind(params); err != nil {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrParameterMatch)
-			return
-		}
 		value, exists := c.Get("user")
 		if !exists {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrUserNotFound)
+			ret.Result(c, http.StatusBadRequest, nil, ret.ErrPermission)
 			return
 		}
-		user, ok := value.(*model.User)
-		if !ok || user.ID != params.ID {
-			ret.Result(c, http.StatusUnauthorized, nil, ret.ErrValidation)
-			return
-		}
+		user := value.(*model.User)
 		ret.Result(c, http.StatusOK, gin.H{"email": user.Email, "name": user.Name}, nil)
 	}
 

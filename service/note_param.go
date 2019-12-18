@@ -1,8 +1,8 @@
 package service
 
 type CreateNoteParams struct {
-	Content  string `json:"content" binding:"required"`
-	AuthorID uint   `json:"authorID" binding:"required"`
+	Content string `json:"content" binding:"required"`
+	ID      uint
 }
 
 type GetNoteParams struct {

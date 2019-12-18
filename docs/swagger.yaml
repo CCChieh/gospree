@@ -1,12 +1,11 @@
 definitions:
   service.CreateNoteParams:
     properties:
-      authorID:
-        type: integer
       content:
         type: string
+      id:
+        type: integer
     required:
-    - authorID
     - content
     type: object
   service.CreateTokenParams:
@@ -46,11 +45,24 @@ paths:
       tags:
       - 文章
   /note:
+    get:
+      parameters:
+      - description: Note
+        in: query
+        name: noteID
+        required: true
+        type: integer
+      responses:
+        "200": {}
+        "400": {}
+      summary: 获取Note
+      tags:
+      - Note
     post:
       parameters:
       - description: Note
         in: body
-        name: user
+        name: note
         required: true
         schema:
           $ref: '#/definitions/service.CreateNoteParams'
