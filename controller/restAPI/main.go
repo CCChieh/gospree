@@ -20,7 +20,7 @@ type RestServer struct {
 	port int
 }
 
-func (rest *RestServer) Start(port int) {
+func (rest *RestServer) Start(URL string, port int) {
 	if port < 0 || port > 65535 {
 		core.Log.Error("Port range error")
 		return
@@ -38,14 +38,16 @@ func (rest *RestServer) Start(port int) {
 
 	r.GET("/swagger/*any", ginSwagger.DisablingWrapHandler(swaggerFiles.Handler, "RELEASE"))
 
+	addr := fmt.Sprintf("%s:%d", URL, port)
+
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", port),
+		Addr:           addr,
 		Handler:        r,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-
+	core.Log.Info("Service run in http://", addr)
 	if err := s.ListenAndServe(); err != nil {
 		core.Log.Err(err)
 	}

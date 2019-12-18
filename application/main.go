@@ -15,13 +15,6 @@ func init() {
 	core.Log = elog.Logger
 	core.Conf = new(config)
 	core.Conf.Init("config.json")
-	core.Conf.SetDatabase(
-		"gospree",
-		"lab.nimingshe.com",
-		3306,
-		"gospree",
-		"wdsrshi19971025",
-	)
 	if err := model.Connection(core.Conf.GetDatabaseUrl()); err != nil {
 		core.Log.Err(err)
 	}

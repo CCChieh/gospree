@@ -11,4 +11,7 @@ type config interface {
 	GetDatabaseUrl() string
 	Save()
 	Init(confFilePath string)
+	GetSiteName() (Name string)
+	GetSiteURL() (URL string)
+	GetSitePort() (Port int)
 }

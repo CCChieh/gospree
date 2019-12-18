@@ -12,9 +12,9 @@ import (
 //配置文件
 type config struct {
 	Site struct {
-		Name        string
-		Port        int
-		LogSaveDays int
+		Name string
+		Port int
+		URL  string
 	}
 	Database struct {
 		Name     string
@@ -24,6 +24,30 @@ type config struct {
 		Password string
 	}
 	confFilePath string `json:"-"`
+}
+
+func (conf *config) SetSite(
+	Name string,
+	URL string,
+	Port int) {
+	conf.Site.Name = Name
+	conf.Site.Port = Port
+	conf.Site.URL = URL
+
+	conf.Save()
+}
+
+func (conf *config) GetSiteName() (Name string) {
+	return conf.Site.Name
+
+}
+
+func (conf *config) GetSiteURL() (URL string) {
+	return conf.Site.URL
+}
+
+func (conf *config) GetSitePort() (Port int) {
+	return conf.Site.Port
 }
 
 func (conf *config) SetDatabase(
@@ -38,6 +62,7 @@ func (conf *config) SetDatabase(
 	conf.Database.Port = Port
 	conf.Database.User = User
 	conf.Database.Password = Password
+
 	conf.Save()
 }
 
@@ -87,5 +112,17 @@ func (conf *config) Init(confFilePath string) {
 			core.Log.Error(core.ErrLoadConfig)
 		}
 		core.Panic(err)
+	} else {
+		conf.SetDatabase(
+			"gospree",
+			"lab.nimingshe.com",
+			3306,
+			"gospree",
+			"wdsrshi19971025",
+		)
+		conf.SetSite(
+			"Nimingshe",
+			"localhost",
+			8080)
 	}
 }
