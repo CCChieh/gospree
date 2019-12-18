@@ -9,4 +9,6 @@ type config interface {
 		Password string,
 	)
 	GetDatabaseUrl() string
+	Save()
+	Init(confFilePath string)
 }

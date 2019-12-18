@@ -24,12 +24,12 @@ func (h *Helper) CreateNoteHandler() (r *ginHelper.Router) {
 		params := new(service.CreateNoteParams)
 		if err := c.ShouldBind(params); err != nil {
 			core.Log.Info(err)
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrParameterMatch)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)
 			return
 		}
 		value, exists := c.Get("user")
 		if !exists {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrPermission)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrPermission)
 			return
 		}
 		user := value.(*model.User)
@@ -64,7 +64,7 @@ func (h *Helper) GetNoteHandler() (r *ginHelper.Router) {
 		params := new(service.GetNoteParams)
 		if err := c.ShouldBind(params); err != nil {
 			core.Log.Info(err)
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrParameterMatch)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)
 			return
 		}
 

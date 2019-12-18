@@ -14,6 +14,7 @@ func init() {
 	elog.Logger.SetSave(true, "GoSpree.log")
 	core.Log = elog.Logger
 	core.Conf = new(config)
+	core.Conf.Init("config.json")
 	core.Conf.SetDatabase(
 		"gospree",
 		"lab.nimingshe.com",

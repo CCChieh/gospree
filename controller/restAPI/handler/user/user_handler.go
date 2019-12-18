@@ -3,6 +3,7 @@ package user
 import (
 	"github.com/ccchieh/ginHelper"
 	"github.com/ccchieh/gospree/controller/restAPI/middleware"
+	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
 	"github.com/ccchieh/gospree/service"
 	"github.com/ccchieh/gospree/util/ret"
@@ -21,7 +22,7 @@ func (h *Helper) GetUserInfoHandler() (r *ginHelper.Router) {
 	handler := func(c *gin.Context) {
 		value, exists := c.Get("user")
 		if !exists {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrPermission)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrPermission)
 			return
 		}
 		user := value.(*model.User)
@@ -48,7 +49,7 @@ func (h *Helper) CreateUserHandler() (r *ginHelper.Router) {
 	handler := func(c *gin.Context) {
 		params := new(service.CreateUserParams)
 		if err := c.ShouldBind(params); err != nil {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrParameterMatch)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)
 			return
 		}
 
@@ -79,7 +80,7 @@ func (h *Helper) CreateTokenHandler() (r *ginHelper.Router) {
 	handler := func(c *gin.Context) {
 		params := new(service.CreateTokenParams)
 		if err := c.ShouldBind(params); err != nil {
-			ret.Result(c, http.StatusBadRequest, nil, ret.ErrParameterMatch)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)
 			return
 		}
 

@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
 	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
@@ -23,20 +24,20 @@ func TokenMiddleware() gin.HandlerFunc {
 		auth := c.GetHeader("authorization")
 
 		if auth == "" {
-			ret.Result(c, http.StatusUnauthorized, nil, ret.ErrValidation)
+			ret.Result(c, http.StatusUnauthorized, nil, core.ErrValidation)
 			c.Abort()
 			return
 		}
 		tokens := strings.Split(auth, " ")
 		if len(tokens) < 2 {
-			ret.Result(c, http.StatusUnauthorized, nil, ret.ErrValidation)
+			ret.Result(c, http.StatusUnauthorized, nil, core.ErrValidation)
 			c.Abort()
 			return
 		}
 		token := tokens[1]
 		user := new(model.User)
 		if !user.CheckToken(token) {
-			ret.Result(c, http.StatusUnauthorized, nil, ret.ErrValidation)
+			ret.Result(c, http.StatusUnauthorized, nil, core.ErrValidation)
 			c.Abort()
 			return
 		}

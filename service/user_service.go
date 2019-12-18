@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
-	"github.com/ccchieh/gospree/util/ret"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -19,7 +18,7 @@ func CreateUserService(params *CreateUserParams) (user *model.User, err error) {
 	}
 	user.Password = string(hash)
 	if err = user.CreateUser(); err != nil {
-		err = ret.ErrUserCreated
+		err = core.ErrUserCreated
 	}
 	return user, err
 }
@@ -29,12 +28,12 @@ func CreateTokenService(params *CreateTokenParams) (token string, id uint, err e
 		Email: params.Email,
 	}
 	if err = user.GetUser(); err != nil {
-		err = ret.ErrPasswordIncorrect
+		err = core.ErrPasswordIncorrect
 		return
 	}
 	id = user.ID
 	if !user.Verification(params.Password) {
-		err = ret.ErrPasswordIncorrect
+		err = core.ErrPasswordIncorrect
 		return
 	}
 	token, err = user.CreateToken()
