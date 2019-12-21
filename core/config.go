@@ -14,4 +14,6 @@ type config interface {
 	GetSiteName() (Name string)
 	GetSiteURL() (URL string)
 	GetSitePort() (Port int)
+	SetNoteNumOfPage(NumOfPage int)
+	GetNoteNumOfPage() (NumOfPage int)
 }

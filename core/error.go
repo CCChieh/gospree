@@ -15,6 +15,7 @@ var (
 	// user errors
 	ErrUserNotFound      = &Err{Code: 20101, Message: "The user was not found"}
 	ErrUserCreated       = &Err{Code: 20102, Message: "The user was created"}
+	ErrEndOfNoteList     = &Err{Code: 20102, Message: "The end of note list"}
 	ErrPasswordIncorrect = &Err{Code: 20104, Message: "The password was incorrect."}
 )
 

@@ -4,7 +4,6 @@ import (
 	"github.com/ccchieh/elog"
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 var App *application

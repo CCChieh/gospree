@@ -23,7 +23,7 @@ func CreateUserService(params *CreateUserParams) (user *model.User, err error) {
 	return user, err
 }
 
-func CreateTokenService(params *CreateTokenParams) (token string, id uint, err error) {
+func CreateTokenService(params *CreateTokenParams) (token string, err error) {
 	user := &model.User{
 		Email: params.Email,
 	}
@@ -31,7 +31,6 @@ func CreateTokenService(params *CreateTokenParams) (token string, id uint, err e
 		err = core.ErrPasswordIncorrect
 		return
 	}
-	id = user.ID
 	if !user.Verification(params.Password) {
 		err = core.ErrPasswordIncorrect
 		return

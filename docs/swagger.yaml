@@ -3,10 +3,11 @@ definitions:
     properties:
       content:
         type: string
-      id:
-        type: integer
+      title:
+        type: string
     required:
     - content
+    - title
     type: object
   service.CreateTokenParams:
     properties:
@@ -71,6 +72,20 @@ paths:
         "200": {}
         "400": {}
       summary: 新建Note
+      tags:
+      - Note
+  /note/list:
+    get:
+      parameters:
+      - description: Note
+        in: query
+        name: page
+        required: true
+        type: integer
+      responses:
+        "200": {}
+        "400": {}
+      summary: 获取NoteList
       tags:
       - Note
   /user:

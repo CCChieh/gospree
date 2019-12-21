@@ -83,3 +83,36 @@ func (h *Helper) GetNoteHandler() (r *ginHelper.Router) {
 			handler,
 		}}
 }
+
+// @Tags Note
+// @Summary 获取NoteList
+// @Param page query int true "Note"
+// @Success 200
+// @Failure 400
+// @Router /note/list [get]
+// @version 1.0
+func (h *Helper) GetNoteIDListHandles() (r *ginHelper.Router) {
+
+	handler := func(c *gin.Context) {
+		params := new(service.GetNoteIDListParams)
+		if err := c.ShouldBind(params); err != nil {
+			core.Log.Info(err)
+			ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)
+			return
+		}
+
+		noteIDs, err := service.GetNoteIDListService(params)
+		if err != nil {
+			ret.Result(c, http.StatusBadRequest, nil, err)
+			return
+		}
+		ret.Result(c, http.StatusOK, gin.H{"noteIDList": noteIDs}, nil)
+	}
+
+	return &ginHelper.Router{
+		Path:   "/list",
+		Method: "GET",
+		Handlers: []gin.HandlerFunc{
+			handler,
+		}}
+}

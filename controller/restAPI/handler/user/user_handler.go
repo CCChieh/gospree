@@ -84,12 +84,12 @@ func (h *Helper) CreateTokenHandler() (r *ginHelper.Router) {
 			return
 		}
 
-		token, id, err := service.CreateTokenService(params)
+		token, err := service.CreateTokenService(params)
 		if err != nil {
 			ret.Result(c, http.StatusBadRequest, nil, err)
 			return
 		}
-		ret.Result(c, http.StatusOK, gin.H{"id": id, "token": token}, nil)
+		ret.Result(c, http.StatusOK, gin.H{"token": token}, nil)
 	}
 
 	return &ginHelper.Router{

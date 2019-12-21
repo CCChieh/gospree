@@ -15,6 +15,9 @@ type config struct {
 		Name string
 		Port int
 		URL  string
+		Note struct {
+			NumOfPage int
+		}
 	}
 	Database struct {
 		Name     string
@@ -50,6 +53,14 @@ func (conf *config) GetSitePort() (Port int) {
 	return conf.Site.Port
 }
 
+func (conf *config) SetNoteNumOfPage(NumOfPage int) {
+	conf.Site.Note.NumOfPage = NumOfPage
+
+	conf.Save()
+}
+func (conf *config) GetNoteNumOfPage() (NumOfPage int) {
+	return conf.Site.Note.NumOfPage
+}
 func (conf *config) SetDatabase(
 	Name string,
 	Host string,
@@ -124,5 +135,6 @@ func (conf *config) Init(confFilePath string) {
 			"Nimingshe",
 			"localhost",
 			8080)
+		conf.SetNoteNumOfPage(10)
 	}
 }
