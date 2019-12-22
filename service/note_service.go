@@ -16,6 +16,7 @@ func CreateNoteService(params *CreateNoteParams) (note *model.Note, err error) {
 	note = &model.Note{
 		Title:    params.Title,
 		Content:  params.Content,
+		PreView:  params.PreView,
 		AuthorID: params.ID,
 	}
 	err = note.CreateNote()

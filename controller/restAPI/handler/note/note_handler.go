@@ -73,7 +73,7 @@ func (h *Helper) GetNoteHandler() (r *ginHelper.Router) {
 			ret.Result(c, http.StatusBadRequest, nil, err)
 			return
 		}
-		ret.Result(c, http.StatusOK, gin.H{"content": note.Content}, nil)
+		ret.Result(c, http.StatusOK, gin.H{"preView": note.PreView, "content": note.Content}, nil)
 	}
 
 	return &ginHelper.Router{

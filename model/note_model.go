@@ -1,7 +1,6 @@
 package model
 
 import (
-	"github.com/ccchieh/gospree/core"
 	"github.com/jinzhu/gorm"
 )
 
@@ -9,6 +8,7 @@ type Note struct {
 	gorm.Model `json:"-"`
 	Title      string
 	Content    string `gorm:"type:text"`
+	PreView    string `gorm:"type:varchar(255)"`
 	AuthorID   uint
 }
 
@@ -25,8 +25,8 @@ type Notes []Note
 //返回最新Note的ID
 func (notes *Notes) GetNoteIDList(page int, num int) ([]uint, error) {
 	var notesID []uint
+	var count int
 	page -= 1
-	core.Log.Info(page, num)
-	err := dao.Offset(page*num).Limit(num).Model(&Note{}).Order("id desc").Pluck("id", &notesID).Error
+	err := dao.Model(&Note{}).Count(&count).Offset(page*num).Limit(num).Order("id desc").Pluck("id", &notesID).Error
 	return notesID, err
 }

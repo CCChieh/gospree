@@ -2,6 +2,7 @@ package service
 
 type CreateNoteParams struct {
 	Title   string `json:"title" binding:"required"`
+	PreView string `json:"preView" binding:"require"`
 	Content string `json:"content" binding:"required"`
 	ID      uint   `json:"-"`
 }
