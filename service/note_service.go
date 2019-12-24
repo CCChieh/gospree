@@ -3,34 +3,57 @@ package service
 import (
 	"github.com/ccchieh/gospree/core"
 	"github.com/ccchieh/gospree/model"
+	"github.com/gin-gonic/gin"
 )
 
-func GetNoteService(params *GetNoteParams) (note *model.Note, err error) {
-	note = new(model.Note)
-	note.ID = params.NoteID
-	err = note.GetNote()
-	return
+type CreateNote struct {
+	baseParams `json:"-"`
+	Title      string `json:"title" binding:"required"`
+	PreView    string `json:"preView" binding:"require"`
+	Content    string `json:"content" binding:"required"`
+	ID         uint   `json:"-"`
 }
 
-func CreateNoteService(params *CreateNoteParams) (note *model.Note, err error) {
-	note = &model.Note{
+func (params *CreateNote) Service() {
+	note := &model.Note{
 		Title:    params.Title,
 		Content:  params.Content,
 		PreView:  params.PreView,
 		AuthorID: params.ID,
 	}
-	err = note.CreateNote()
+	params.err = note.CreateNote()
+	params.result = gin.H{"noteID": note.ID}
 	return
 }
 
-func GetNoteIDListService(params *GetNoteIDListParams) (noteIDs []uint, err error) {
+type GetNote struct {
+	baseParams `json:"-"`
+	NoteID     uint `form:"noteID" binding:"required"`
+}
+
+func (params *GetNote) Service() {
+	note := new(model.Note)
+	note.ID = params.NoteID
+	core.Log.Info(params.NoteID)
+	params.err = note.GetNote()
+	params.result = gin.H{"title": note.Title, "preView": note.PreView, "content": note.Content}
+}
+
+type GetNoteList struct {
+	baseParams `json:"-"`
+	Page       int `form:"page" binding:"required"`
+}
+
+func (params *GetNoteList) Service() {
 	notes := new(model.Notes)
-	noteIDs, err = notes.GetNoteIDList(params.Page, core.Conf.GetNoteNumOfPage())
+	noteList, err := notes.GetNoteIDList(params.Page, core.Conf.GetNoteNumOfPage())
 	if err != nil {
+		params.err = err
 		return
 	}
-	if len(noteIDs) == 0 {
-		err = core.ErrEndOfNoteList
+	if len(noteList) == 0 {
+		params.err = core.ErrEndOfNoteList
+		return
 	}
-	return
+	params.result = gin.H{"noteList": noteList}
 }

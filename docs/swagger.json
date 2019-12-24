@@ -51,7 +51,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/service.CreateNoteParams"
+                            "$ref": "#/definitions/service.CreateNote"
                         }
                     }
                 ],
@@ -151,7 +151,7 @@
         }
     },
     "definitions": {
-        "service.CreateNoteParams": {
+        "service.CreateNote": {
             "type": "object",
             "required": [
                 "content",
@@ -160,6 +160,15 @@
             "properties": {
                 "content": {
                     "type": "string"
+                },
+                "err": {
+                    "type": "error"
+                },
+                "preView": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "object"
                 },
                 "title": {
                     "type": "string"

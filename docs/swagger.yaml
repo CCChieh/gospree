@@ -1,8 +1,14 @@
 definitions:
-  service.CreateNoteParams:
+  service.CreateNote:
     properties:
       content:
         type: string
+      err:
+        type: error
+      preView:
+        type: string
+      result:
+        type: object
       title:
         type: string
     required:
@@ -66,7 +72,7 @@ paths:
         name: note
         required: true
         schema:
-          $ref: '#/definitions/service.CreateNoteParams'
+          $ref: '#/definitions/service.CreateNote'
           type: object
       responses:
         "200": {}

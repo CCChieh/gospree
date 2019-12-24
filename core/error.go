@@ -1,27 +1,31 @@
 package core
 
-import "fmt"
+import (
+	"fmt"
+	"net/http"
+)
 
 var (
-	OK            = &Err{Code: 0, Message: "OK"}
-	ErrUnknown    = &Err{Code: 99999, Message: "ErrUnknown error"}
-	ErrPermission = &Err{Code: 10001, Message: "Need to check permissions"}
-	ErrLoadConfig = &Err{Code: 10002, Message: "Loading config file error"}
+	OK            = &Err{statusCode: http.StatusOK, Code: 0, Message: "OK"}
+	ErrUnknown    = &Err{statusCode: http.StatusInternalServerError, Code: 99999, Message: "ErrUnknown error"}
+	ErrPermission = &Err{statusCode: http.StatusForbidden, Code: 10001, Message: "Need to check permissions"}
+	ErrLoadConfig = &Err{statusCode: http.StatusInternalServerError, Code: 10002, Message: "Loading config file error"}
 	// system errors
 
-	ErrValidation     = &Err{Code: 20001, Message: "Validation failed"}
-	ErrParameterMatch = &Err{Code: 20003, Message: "Insufficient or non-compliant parameters provided"}
+	ErrValidation     = &Err{statusCode: http.StatusUnauthorized, Code: 20001, Message: "Validation failed"}
+	ErrParameterMatch = &Err{statusCode: http.StatusBadRequest, Code: 20003, Message: "Insufficient or non-compliant parameters provided"}
 
 	// user errors
-	ErrUserNotFound      = &Err{Code: 20101, Message: "The user was not found"}
-	ErrUserCreated       = &Err{Code: 20102, Message: "The user was created"}
-	ErrEndOfNoteList     = &Err{Code: 20102, Message: "The end of note list"}
-	ErrPasswordIncorrect = &Err{Code: 20104, Message: "The password was incorrect."}
+	ErrUserNotFound      = &Err{statusCode: http.StatusBadRequest, Code: 20101, Message: "The user was not found"}
+	ErrUserCreated       = &Err{statusCode: http.StatusBadRequest, Code: 20102, Message: "The user was created"}
+	ErrEndOfNoteList     = &Err{statusCode: http.StatusBadRequest, Code: 20102, Message: "The end of note list"}
+	ErrPasswordIncorrect = &Err{statusCode: http.StatusForbidden, Code: 20104, Message: "The password was incorrect."}
 )
 
 type Err struct {
-	Code    int
-	Message string
+	statusCode int
+	Code       int
+	Message    string
 }
 
 func (err *Err) Error() string {
