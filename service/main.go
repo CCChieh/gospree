@@ -10,7 +10,6 @@ import (
 
 type Params interface {
 	Err() error
-	SetErr(error)
 	Result() interface{}
 	Service()
 }
@@ -24,14 +23,12 @@ func (base *baseParams) Err() error {
 	return base.err
 }
 
-func (base *baseParams) SetErr(err error) {
-	base.err = err
-}
-
 func (base *baseParams) Result() interface{} {
 	return base.result
 }
-
+func (base *baseParams) Service() {
+	//默认不做任何操作
+}
 func Process(c *gin.Context, params Params) {
 	if err := c.ShouldBind(params); err != nil {
 		ret.Result(c, http.StatusBadRequest, nil, core.ErrParameterMatch)

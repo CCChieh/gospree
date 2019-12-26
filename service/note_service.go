@@ -9,7 +9,7 @@ import (
 type CreateNote struct {
 	baseParams `json:"-"`
 	Title      string `json:"title" binding:"required"`
-	PreView    string `json:"preView" binding:"require"`
+	PreView    string `json:"preView" binding:"required"`
 	Content    string `json:"content" binding:"required"`
 	ID         uint   `json:"-"`
 }

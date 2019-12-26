@@ -13,6 +13,7 @@ definitions:
         type: string
     required:
     - content
+    - preView
     - title
     type: object
   service.CreateTokenParams:

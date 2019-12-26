@@ -155,6 +155,7 @@
             "type": "object",
             "required": [
                 "content",
+                "preView",
                 "title"
             ],
             "properties": {
