@@ -16,3 +16,17 @@ func TestNote(t *testing.T) {
 	fmt.Println(notes.GetNoteIDList(5, 2))
 	fmt.Println(notes.GetNoteIDList(6, 2))
 }
+
+type N struct {
+	name string
+	age  int
+	St   Interface
+}
+type Interface interface {
+}
+
+func TestSt(t *testing.T) {
+	n := N{}
+	fmt.Println(n)
+	fmt.Println(n.St == nil)
+}

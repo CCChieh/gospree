@@ -4,7 +4,6 @@ import (
 	"github.com/ccchieh/ginHelper"
 	"github.com/ccchieh/gospree/util/ret"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 // @Summary 第一个API
@@ -24,5 +23,5 @@ func (h *Helper) HelloHandler() (r *ginHelper.Router) {
 }
 func helloHandler(c *gin.Context) {
 
-	ret.Result(c, http.StatusOK, "Hello", nil)
+	ret.Result(c, "Hello", nil)
 }

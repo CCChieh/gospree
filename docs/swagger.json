@@ -115,7 +115,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/service.CreateUserParams"
+                            "$ref": "#/definitions/service.CreateUser"
                         }
                     }
                 ],
@@ -139,7 +139,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "$ref": "#/definitions/service.CreateTokenParams"
+                            "$ref": "#/definitions/service.CreateToken"
                         }
                     }
                 ],
@@ -162,21 +162,15 @@
                 "content": {
                     "type": "string"
                 },
-                "err": {
-                    "type": "error"
-                },
                 "preView": {
                     "type": "string"
-                },
-                "result": {
-                    "type": "object"
                 },
                 "title": {
                     "type": "string"
                 }
             }
         },
-        "service.CreateTokenParams": {
+        "service.CreateToken": {
             "type": "object",
             "required": [
                 "email",
@@ -191,7 +185,7 @@
                 }
             }
         },
-        "service.CreateUserParams": {
+        "service.CreateUser": {
             "type": "object",
             "required": [
                 "email",

@@ -3,12 +3,8 @@ definitions:
     properties:
       content:
         type: string
-      err:
-        type: error
       preView:
         type: string
-      result:
-        type: object
       title:
         type: string
     required:
@@ -16,7 +12,7 @@ definitions:
     - preView
     - title
     type: object
-  service.CreateTokenParams:
+  service.CreateToken:
     properties:
       email:
         type: string
@@ -26,7 +22,7 @@ definitions:
     - email
     - password
     type: object
-  service.CreateUserParams:
+  service.CreateUser:
     properties:
       email:
         type: string
@@ -116,7 +112,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/service.CreateUserParams'
+          $ref: '#/definitions/service.CreateUser'
           type: object
       responses:
         "200": {}
@@ -132,7 +128,7 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/service.CreateTokenParams'
+          $ref: '#/definitions/service.CreateToken'
           type: object
       responses:
         "200": {}
