@@ -1,7 +1,9 @@
 package model
 
 import (
+	"github.com/ccchieh/gospree/core"
 	"github.com/jinzhu/gorm"
+	"time"
 )
 
 type Note struct {
@@ -23,10 +25,36 @@ func (note *Note) CreateNote() error {
 type Notes []Note
 
 //返回最新Note的ID
-func (notes *Notes) GetNoteIDList(page int, num int) ([]uint, error) {
-	var notesID []uint
-	var count int
+func (notes *Notes) GetNoteList(page int, num int) (interface{}, error) {
+	type result struct {
+		ID        uint
+		Title     string
+		PreView   string
+		CreatedAt time.Time
+		AuthorID  uint `json:"-"`
+		Author    string
+	}
+	var ret []result
 	page -= 1
-	err := dao.Model(&Note{}).Count(&count).Offset(page*num).Limit(num).Order("id desc").Pluck("id", &notesID).Error
-	return notesID, err
+	err := dao.Model(&Note{}).Offset(page * num).Limit(num).Order("id desc").Scan(&ret).Error
+	if len(ret) == 0 {
+		err = core.ErrEndOfNoteList
+		return ret, err
+	}
+	type Author struct {
+		Name string
+	}
+	idNameMap := map[uint]string{}
+	for i := range ret {
+		if val, ok := idNameMap[ret[i].AuthorID]; ok {
+			ret[i].Author = val
+		} else {
+			author := new(Author)
+			dao.Model(&User{}).Select("name").Where("id = ?", ret[i].AuthorID).Scan(author)
+			ret[i].Author = author.Name
+			idNameMap[ret[i].AuthorID] = author.Name
+		}
+
+	}
+	return ret, err
 }

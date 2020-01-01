@@ -57,14 +57,10 @@ type GetNoteList struct {
 
 func (param *GetNoteList) Service() {
 	notes := new(model.Notes)
-	noteList, err := notes.GetNoteIDList(param.Page, core.Conf.GetNoteNumOfPage())
+	noteList, err := notes.GetNoteList(param.Page, core.Conf.GetNoteNumOfPage())
 	if err != nil {
 		param.Err = err
 		return
 	}
-	if len(noteList) == 0 {
-		param.Err = core.ErrEndOfNoteList
-		return
-	}
-	param.Ret = gin.H{"noteList": noteList}
+	param.Ret = noteList
 }
