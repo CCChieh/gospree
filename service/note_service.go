@@ -56,11 +56,21 @@ type GetNoteList struct {
 }
 
 func (param *GetNoteList) Service() {
-	notes := new(model.Notes)
+	notes := new(model.Note)
 	noteList, err := notes.GetNoteList(param.Page, core.Conf.GetNoteNumOfPage())
 	if err != nil {
 		param.Err = err
 		return
 	}
-	param.Ret = noteList
+	ret := make([]map[string]interface{}, len(noteList))
+	for i := range ret {
+		ret[i] = gin.H{
+			"title":     noteList[i].Title,
+			"id":        noteList[i].ID,
+			"preView":   noteList[i].PreView,
+			"createdAt": noteList[i].CreatedAt,
+			"author":    noteList[i].Author,
+		}
+	}
+	param.Ret = ret
 }

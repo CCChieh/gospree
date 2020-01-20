@@ -22,19 +22,19 @@ func (note *Note) CreateNote() error {
 	return dao.Create(note).Error
 }
 
-type Notes []Note
+type getNoteListResult struct {
+	ID        uint
+	Title     string
+	PreView   string
+	CreatedAt time.Time
+	AuthorID  uint
+	Author    string
+}
 
-//返回最新Note的ID
-func (notes *Notes) GetNoteList(page int, num int) (interface{}, error) {
-	type result struct {
-		ID        uint
-		Title     string
-		PreView   string
-		CreatedAt time.Time
-		AuthorID  uint `json:"-"`
-		Author    string
-	}
-	var ret []result
+//返回最新Note的list
+func (note *Note) GetNoteList(page int, num int) ([]getNoteListResult, error) {
+
+	var ret []getNoteListResult
 	page -= 1
 	err := dao.Model(&Note{}).Offset(page * num).Limit(num).Order("id desc").Scan(&ret).Error
 	if len(ret) == 0 {
