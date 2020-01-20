@@ -62,13 +62,14 @@ func (param *GetNoteList) Service() {
 		param.Err = err
 		return
 	}
+	//time.Sleep(time.Second*3)
 	ret := make([]map[string]interface{}, len(noteList))
 	for i := range ret {
 		ret[i] = gin.H{
 			"title":     noteList[i].Title,
 			"id":        noteList[i].ID,
 			"preView":   noteList[i].PreView,
-			"createdAt": noteList[i].CreatedAt,
+			"createdAt": noteList[i].CreatedAt.Unix(),
 			"author":    noteList[i].Author,
 		}
 	}

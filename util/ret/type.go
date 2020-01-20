@@ -1,10 +1,8 @@
 package ret
 
-import "time"
-
 type baseResult struct {
-	Time time.Time `json:"time"`
-	Code int       `json:"code"`
+	Time int64 `json:"time"`
+	Code int   `json:"code"`
 }
 
 type okResult struct {
