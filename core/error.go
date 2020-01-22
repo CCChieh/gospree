@@ -18,7 +18,7 @@ var (
 	// user errors
 	ErrUserNotFound      = &Err{HttpStatusCode: http.StatusNotFound, Code: 20101, Message: "The user was not found"}
 	ErrUserCreated       = &Err{HttpStatusCode: http.StatusBadRequest, Code: 20102, Message: "The user was created"}
-	ErrEndOfNoteList     = &Err{HttpStatusCode: http.StatusBadRequest, Code: 20103, Message: "The end of note list"}
+	ErrEndOfNoteList     = &Err{HttpStatusCode: http.StatusNotFound, Code: 20103, Message: "The end of note list"}
 	ErrPasswordIncorrect = &Err{HttpStatusCode: http.StatusForbidden, Code: 20104, Message: "The password was incorrect."}
 
 	//note errors
