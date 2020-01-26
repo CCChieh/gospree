@@ -47,7 +47,13 @@ func (param *GetNote) Service() {
 		param.Err = core.ErrNoteNotFound
 		return
 	}
-	param.Ret = gin.H{"title": note.Title, "preView": note.PreView, "content": note.Content}
+	author := new(model.User).GetUserNameById(note.AuthorID)
+	param.Ret = gin.H{
+		"title":     note.Title,
+		"author":    author,
+		"content":   note.Content,
+		"createdAt": note.CreatedAt.Unix(),
+	}
 }
 
 type GetNoteList struct {

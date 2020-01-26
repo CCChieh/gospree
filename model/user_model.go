@@ -21,6 +21,11 @@ func (user *User) GetUser() error {
 	return dao.Where(user).First(user).Error
 }
 
+func (user *User) GetUserNameById(id uint) string {
+	dao.Model(&User{}).Where("id = ?", id).Select("name").First(user)
+	return user.Name
+}
+
 func (user *User) CreateUser() error {
 	return dao.Create(user).Error
 }
